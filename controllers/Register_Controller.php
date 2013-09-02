@@ -6,7 +6,7 @@
  */
 class Register_Controller extends Joim_Controller {
 
-	public function __construct() {
+	public function _init() {
 		$this->template = 'register';
 		$this->template_section = 'public';
 	}
@@ -14,7 +14,7 @@ class Register_Controller extends Joim_Controller {
 	 * @desc Shows a registry form
 	 * @return void
 	 */
-	public function index() {
+	public function indexAction() {
 		$this->view()->show($this->args);
 	}
 }

@@ -9,7 +9,7 @@ class Home_Controller extends Joim_Controller {
 	/**
 	 * @desc Controller construct, chooses the main template and its section.
 	 */
-	public function __construct() {
+	public function _init() {
 		$this->template_section = 'public';
 		$this->template = 'login';
 	}
@@ -18,7 +18,7 @@ class Home_Controller extends Joim_Controller {
 	 * @desc Shows the main home page where you can login.
 	 * @return void
 	 */
-	public function index() {
+	public function indexAction() {
 		$this->view()->addJs('login')->show($this->args);
 	}
 }

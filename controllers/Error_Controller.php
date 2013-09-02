@@ -10,8 +10,8 @@ class Error_Controller extends Joim_Controller {
 	 * @desc Shows generic error
 	 * @return void
 	 */
-	public function index() {
-		$view = new htmlHandler('error', 'errors');
+	public function indexAction() {
+		$view = new Joim_View('error', 'errors');
 		$view->addData($this->args);
 		$view->show();
 	}
@@ -20,9 +20,9 @@ class Error_Controller extends Joim_Controller {
 	 * @desc Shows a specific error given a valid error number
 	 * @param int $errno
 	 */
-	public function error($errno) {
+	public function errorAction($errno) {
 		header('Status: ' .$this->_getErrHeader($errno));
-		$view = new Html_Handler('error_to_user', 'errors');
+		$view = new Joim_View('error_to_user', 'errors');
 		$view->addData(array(
 			'code' => $errno,
 			'message' => $this->_getErrorMsg($errno),
@@ -49,7 +49,7 @@ class Error_Controller extends Joim_Controller {
 	 * @return string
 	 */
 	private function _getErrorMsg($errno) {
-		$text403 = (Session_Handler::get('userid')) ? 
+		$text403 = (Joim_Session::get('userid')) ? 
 			'This page is restricted, only administrators can access.'
 			: "You don't have permission to access this page.<br />You might either need to <a href='/register'>register</a> or it's a limited access page.";
 		$messages = array(
@@ -64,7 +64,7 @@ class Error_Controller extends Joim_Controller {
 	 * @desc Shows 404 error (Not found)
 	 * @return void
 	 */
-	public function e404() {
+	public function e404Action() {
 		$this->error(404);
 	}
 
@@ -72,7 +72,7 @@ class Error_Controller extends Joim_Controller {
 	 * @desc Shows 403 error (Forbidden)
 	 * @return void
 	 */
-	public function e403() {
+	public function e403Action() {
 		$this->error(403);
 	}
 
@@ -80,7 +80,7 @@ class Error_Controller extends Joim_Controller {
 	 * @desc Shows 500 error (Internal server error)
 	 * @return void
 	 */
-	public function e500() {
+	public function e500Action() {
 		$this->error(500);
 	}
 }
