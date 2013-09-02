@@ -6,21 +6,14 @@
  * @modified 2013-06-29
  */
 class Joim_Ajax {
-	
-	/**
-	 * @desc Class constructor
-	 * @return void
-	 */
-	public function __construct() {
-	}
-	
 	/**
 	 * @desc Sends data in JSON format
 	 * @param array $data
 	 * @return void
 	 */
 	public static function json($data) {
-		echo json_encode($data);
+		echo 'while(1){}; ' . json_encode($data);
+		die();
 	}
 
 	/**
@@ -30,5 +23,6 @@ class Joim_Ajax {
 	 */
 	public static function pure($data) {
 		echo $data;
+		die();
 	}
 }

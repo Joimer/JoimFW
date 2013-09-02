@@ -6,8 +6,25 @@
  */
 class Joim_Security {
 
-	public static function makeAlnum($value) {
-		return preg_replace($value, '/[^A-z][^0-9]/' , '');
+	public static function makeAlNum($value) {
+		return preg_replace('/[^A-z0-9]/' , '', $value);
+	}
+
+	public static function cleanse(&$var) {
+		$var = trim(strip_tags($var));
+	}
+
+	public static function saltPassword($password) {
+		$salt = sha1(Joim_Config::get('salt'));
+		return $salt . $password . $salt;
+	}
+
+	/**
+	 * @desc Function that takes a raw password and hashes it accordingly
+	 */
+	public static function hashPassword($password) {
+		$salt = sha1(Joim_Config::get('salt'));
+		return self::bcrypt(self::saltPassword($password), array('salt' => $salt, 'cost' => 11));
 	}
 
 	/**

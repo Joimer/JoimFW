@@ -48,13 +48,13 @@ class Joim_Bootstrap {
 		if (count($actions) > 0) {
 			// We just pass the actions to the vars.
 			foreach ($actions as $var) {
-				$pageVars[] = Joim_Security::makeAlnum($var);
+				$pageVars[] = $var; //Joim_Security::makeAlnum($var);
 			}
 		}
 
 		// We return both the post data and page vars, which will be passed to 
 		// controller by construct and held there for usage by the methods.
-		return array_merge($pageVars, $_POST);
+		return array_merge($pageVars, $_REQUEST);
 	}
 	
 	/**
@@ -66,7 +66,7 @@ class Joim_Bootstrap {
 		$pageVars = self::getVars();
 		if (in_array($pageVars['controller'], array('index', 'public', 'news'))) {
 			$controller = new Home_Controller($pageVars);
-			$controller->index();
+			$controller->process('index');
 		} else {
 			$controllerName = ucfirst(strtolower($pageVars['controller'])) . '_Controller';
 			$controller = new $controllerName($pageVars);

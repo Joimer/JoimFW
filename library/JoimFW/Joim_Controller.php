@@ -44,13 +44,32 @@ class Joim_Controller {
 		$this->args = $args;
 		$this->template = $template;
 		$this->template_section = $section;
-		$this->view = new Joim_View($this->template, $this->template_section);
+		$this->_init();
 	}
+
+	/**
+	 * @desc Function to call after construct is done on all controllers. No need to call parent::__construct() and repeat some of its code.
+	 */
+	protected function _init() {}
+
+	/**
+	 * @desc Late Static Binding singleton instancer
+	 */
+	public static function getInstance() {
+		static $object;
+		if (!$object) $object = static::instaceOfSelf();
+		return $object;
+	}
+
+	protected static function instaceOfSelf() {
+        return new self();
+    }
 	
 	/**
 	 * @desc Process a new action
 	 */
 	 public function process($action) {
+		$action = $action . 'Action';
 		if (method_exists($this, $action)) {
 			$this->$action();
 		} else {
@@ -96,8 +115,8 @@ class Joim_Controller {
 	 * @desc Main method, index of the controller.
 	 * @return void
 	 */
-	public function index() {
-		$this->view();
+	public function indexAction() {
+		$this->view()->show();
 	}
 
 	/**
@@ -107,9 +126,5 @@ class Joim_Controller {
 	 */
 	protected function _isUserAllowed($authlevel) {
 		return $authlevel <= intval(Joim_Session::get('auth'));
-	}
-	
-	public function isAjax() {
-		return $this->isAjax;
 	}
 }

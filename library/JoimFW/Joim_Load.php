@@ -5,6 +5,7 @@
  * @since 2013-04-20
  * @modified 2013-06-29
  * @TODO Use of spl_autoload_register
+ * @TODO Register new class name loaders outside of framework to keep framework totally separated from application
  */
 function __autoload($className) {
 	JoimFW::loader($className);
@@ -39,9 +40,7 @@ class Joim_Load {
 				// Application controllers
 				case (stripos($className, 'controller') !== false):
 					$fullRoute = "controllers/{$className}.php";
-					if (file_exists($fullRoute)) {
-						require_once($fullRoute);
-					} else {
+					if (!file_exists($fullRoute)) {
 						$controller = new Error_Controller();
 						$controller->e404();
 					}

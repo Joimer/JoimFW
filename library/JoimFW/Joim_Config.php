@@ -28,7 +28,7 @@ class Joim_Config {
 	 * @desc Gets a pre-set configuration variable
 	 * @return mixed
 	 */
-	public static function get($value, $valueKey=NULL) {
+	public static function get($value) {
 		return (isset(self::$configValues[$value]))? self::$configValues[$value] : false;
 	}
 }

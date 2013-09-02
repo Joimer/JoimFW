@@ -17,14 +17,14 @@ class Joim_Session {
 	 * @desc Constructor
 	 * @return void
 	 */
-	public static function init() {
+	protected static function _init() {
 		self::$namespace = sha1($_SERVER['SERVER_ADDR'] . Joim_Config::get('salt'));
-		self::set('expires', time() + 86400);
+		self::set('expires', time() + self::EXPIRETIME);
 	}
 	
 	public static function start() {
 		session_start();
-		self::init();
+		self::_init();
 		$expires = self::get('expires');
 		if (!empty($expires) && $expires < time()) {
 			session_unset();
@@ -36,19 +36,21 @@ class Joim_Session {
 		} else {
 			$started = self::get('started');
 			if (!empty($started)) {
-				if (time() - $started > 43200) {
-					session_regenerate_id();
-				}
+				if (time() - $started > 43200) session_regenerate_id();
 			} else {
 				self::set('started', time());
 			}
 		}
 	}
 	
+	/**
+	 * @desc Utterly and ultimately destroy the session variables
+	 */
 	public static function end() {
 		session_unset();
 		session_destroy();
 		$_SESSION = array();
+		unset($_SESSION);
 	}
 	
 	public static function set($name, $value) {
@@ -75,7 +77,7 @@ class Joim_Session {
 	}
 
 	public static function reloadSessionData($userid=0) {
-		if ($userid == 0) $userid = (int) self::get('userid');
+		if ($userid === 0) $userid = (int) self::get('userid');
 		if ($userid > 0) {
 			$userData = userModel::getAllUserData($userid);
 			self::set('loggedin', true);

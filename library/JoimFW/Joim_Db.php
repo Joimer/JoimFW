@@ -15,10 +15,10 @@ class Joim_Db extends Zend_Db {
 		static $adapter = null;
 		if (empty($adapter)) {
 			$adapter = self::factory('Mysqli', array(
-				'host'     => Joim_Config::get('dbhost'),
-				'username' => Joim_Config::get('dbuser'),
-				'password' => Joim_Config::get('dbpass'),
-				'dbname'   => Joim_Config::get('dbname'),
+				'host'     => Joim_Config::get('database.host'),
+				'username' => Joim_Config::get('database.user'),
+				'password' => Joim_Config::get('database.password'),
+				'dbname'   => Joim_Config::get('database.name'),
 				'driver_options' => array(MYSQLI_INIT_COMMAND => 'SET NAMES UTF8;')
 			));
 		}
