@@ -34,6 +34,11 @@ class Joim_Controller {
 	 * @var bool
 	 */
 	protected $isAjax = false;
+
+	/**
+	 * @desc Instances of classes called
+	 */
+	protected static $_instance = null;
 	
 	/**
 	 * @desc Class constructor. Passes args to the class
@@ -56,14 +61,9 @@ class Joim_Controller {
 	 * @desc Late Static Binding singleton instancer
 	 */
 	public static function getInstance() {
-		static $object;
-		if (!$object) $object = static::instaceOfSelf();
-		return $object;
+		if (!static::$_instance) static::$_instance = new static();
+		return static::$_instance;
 	}
-
-	protected static function instaceOfSelf() {
-        return new self();
-    }
 	
 	/**
 	 * @desc Process a new action
