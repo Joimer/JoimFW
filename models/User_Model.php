@@ -6,6 +6,9 @@
  */
 class User_Model extends Joim_Model {
 	
+	/**
+	 * @desc Example function
+	 */
 	public static function userAccountExists($username) {
 		$select = Joim_Db::getInstance()->select()
 			->from('accounts', array('exists' => 'COUNT(username)'))

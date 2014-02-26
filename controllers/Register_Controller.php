@@ -1,6 +1,6 @@
 <?php
 /**
- * @desc Controller to register new MK3 accounts
+ * @desc Controller to register new accounts
  * @author jmserrano
  * @since 2013-05-05
  */
@@ -15,6 +15,6 @@ class Register_Controller extends Joim_Controller {
 	 * @return void
 	 */
 	public function indexAction() {
-		$this->view()->show($this->args);
+		$this->view()->show();
 	}
 }
