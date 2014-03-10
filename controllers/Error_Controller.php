@@ -65,7 +65,7 @@ class Error_Controller extends Joim_Controller {
 	 * @return void
 	 */
 	public function e404Action() {
-		$this->error(404);
+		$this->process('error', 404);
 	}
 
 	/**
@@ -73,7 +73,7 @@ class Error_Controller extends Joim_Controller {
 	 * @return void
 	 */
 	public function e403Action() {
-		$this->error(403);
+		$this->process('error', 403);
 	}
 
 	/**
@@ -81,6 +81,6 @@ class Error_Controller extends Joim_Controller {
 	 * @return void
 	 */
 	public function e500Action() {
-		$this->error(500);
+		$this->process('error', 500);
 	}
 }

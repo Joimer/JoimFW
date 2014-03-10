@@ -42,7 +42,7 @@ class Joim_Load {
 					$fullRoute = "controllers/{$className}.php";
 					if (!file_exists($fullRoute)) {
 						$controller = new Error_Controller();
-						$controller->e404();
+						$controller->process('error', 404);
 					}
 					break;
 				// Application models
