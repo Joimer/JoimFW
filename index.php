@@ -1,22 +1,13 @@
 <?php
-/**
- * This is the index page. All requests go here through a simple RewriteRule to be processed depending on the query string.
- **/
+// Total error reporting. No error, even an E_NOTICE, shall be accepted.
+error_reporting(E_ALL);
+// Require the autoload class to autoload all classes called in start up
+require_once('library/JoimFW/Joim_Load.php');
+// Try-catch block that executes the whole application.
 try {
-	// Autoload class
-	require('autoload.php');
-	// The FrameWork class to bootstrap the application
-	require('bootstrap.php');
-	// We are ready, let's load the whole thing
-	$session = new sessionHandler();
-	$session->start();
-	JoimFW::config();
-	// Example of cookie usage to log in an user
-	$cookie = cookieHandler::getUserCookie();
-	cookieHandler::logInUserByCookie();
-	JoimFW::load(JoimFW::getVars(configHandler::get('aliases')));
+	Joim_Load::register();
+	Joim_Bootstrap::init();
 } catch (ErrorException $e) {
 	// Something happened, let's catch and handle the error
-	JoimFW::execError($e);
+	Joim_Error::execError($e);
 }
-?>
