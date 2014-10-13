@@ -8,6 +8,5 @@ RewriteRule . - [L]
 Options +FollowSymLinks 
 RewriteEngine	On
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ /index.php?actions=$1  [L,QSA]
 </IfModule>
