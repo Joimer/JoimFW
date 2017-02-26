@@ -2,23 +2,14 @@
 
 namespace Controller;
 
+use \Http\Response\Html;
+use \Http\Response\IResponse;
+use \Templating\View\Register as RegisterView;
 
-/**
- * @desc Controller to register new accounts
- * @author jmserrano
- * @since 2013-05-05
- */
-class Register extends \Joim\Controller {
+class Register implements IController {
 
-	public function _init() {
-		$this->template = 'register';
-		$this->templateSection = 'public';
-	}
-	/**
-	 * @desc Shows a registry form
-	 * @return void
-	 */
-	public function indexAction() {
-		$this->view()->show();
+	public function run() : IResponse {
+		$view = new RegisterView();
+		return new Html($view);
 	}
 }

@@ -1,6 +1,0 @@
-<IfModule mod_rewrite.c>
-Options +FollowSymLinks 
-RewriteEngine	On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.*)$ /index.php?actions=$1  [L,QSA]
-</IfModule>

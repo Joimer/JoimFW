@@ -50,11 +50,6 @@ blink {
 .center {
 	text-align: center;
 }
-.noshadow {
-	box-shadow: 0 0 0 ;
-	-moz-box-shadow: 0 0 0;
-	-webkit-box-shadow: 0 0 0;
-}
 .totalwidth {
     width: 100%;
     text-align: center;

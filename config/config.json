@@ -1,0 +1,5 @@
+{
+	"default-timezone": "Europe/Madrid",
+	"error-handler": "Application\\Error\\Handler::handle",
+	"action-route": "actions"
+}
